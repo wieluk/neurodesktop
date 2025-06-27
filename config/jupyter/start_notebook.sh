@@ -36,10 +36,13 @@ apply_chown_if_needed() {
     fi
 }
 
-apply_chown_if_needed "${HOME}" true
-# apply_chown_if_needed "${HOME}" false
-# apply_chown_if_needed "${HOME}/.local" false
-# apply_chown_if_needed "${HOME}/.local/share" false
-# apply_chown_if_needed "${HOME}/.ssh" true
-# apply_chown_if_needed "${HOME}/.local/share/jupyter" true
-
+if [ "${DISABLE_STARTUP_CHOWN:-}" = "TRUE" ]; then
+    return
+else
+    apply_chown_if_needed "${HOME}" true
+    # apply_chown_if_needed "${HOME}" false
+    # apply_chown_if_needed "${HOME}/.local" false
+    # apply_chown_if_needed "${HOME}/.local/share" false
+    # apply_chown_if_needed "${HOME}/.ssh" true
+    # apply_chown_if_needed "${HOME}/.local/share/jupyter" true
+fi
